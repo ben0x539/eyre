@@ -28,6 +28,7 @@ pyo3 = { version = "0.13", default-features = false, features = ["auto-initializ
 indenter = "0.3.0"
 once_cell = "1.4.0"
 pyo3 = { version = "0.13", optional = true, default-features = false }
+narrow_box = { git = "https://github.com/ben0x539/narrow_box" }
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]

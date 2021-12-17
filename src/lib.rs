@@ -326,9 +326,8 @@ mod macros;
 mod wrapper;
 
 use crate::backtrace::Backtrace;
-use crate::error::ErrorImpl;
+use crate::error::ErrorWithHandler;
 use core::fmt::Display;
-use core::mem::ManuallyDrop;
 
 use std::error::Error as StdError;
 
@@ -421,7 +420,7 @@ pub use WrapErr as Context;
 /// [`EyreHandler`]: trait.EyreHandler.html
 /// [`hook`]: fn.set_hook.html
 pub struct Report {
-    inner: ManuallyDrop<Box<ErrorImpl<()>>>,
+    inner: narrow_box::NarrowBox<dyn ErrorWithHandler + Send + Sync + 'static>
 }
 
 type ErrorHook =
@@ -1130,6 +1129,6 @@ pub mod private {
     where
         M: Display + Debug + Send + Sync + 'static,
     {
-        Report::from_adhoc(message)
+        Report::msg(message)
     }
 }

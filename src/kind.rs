@@ -67,7 +67,7 @@ impl Adhoc {
     where
         M: Display + Debug + Send + Sync + 'static,
     {
-        Report::from_adhoc(message)
+        Report::msg(message)
     }
 }
 
